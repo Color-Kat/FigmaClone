@@ -1,11 +1,8 @@
 "use client";
 
 import { ReactNode } from "react";
-import {
-    LiveblocksProvider,
-    RoomProvider,
-    ClientSideSuspense,
-} from "@liveblocks/react/suspense";
+import { RoomProvider } from "@/liveblocks.config";
+import { ClientSideSuspense } from "@liveblocks/react";
 
 export function Room({ children }: { children: ReactNode }) {
     const apiKey = process.env.NEXT_PUBLIC_LIVEBLOCKS_PUBLIC_KEY!;
@@ -13,12 +10,10 @@ export function Room({ children }: { children: ReactNode }) {
     console.log(apiKey);
 
     return (
-        <LiveblocksProvider publicApiKey={apiKey}>
-            <RoomProvider id="my-room">
-                <ClientSideSuspense fallback={<div>Loading…</div>}>
-                    {children}
-                </ClientSideSuspense>
-            </RoomProvider>
-        </LiveblocksProvider>
+        <RoomProvider id="my-room" initialPresence={{}}>
+            <ClientSideSuspense fallback={<div>Loading...</div>}>
+                {() => children}
+            </ClientSideSuspense>
+        </RoomProvider>
     );
 }

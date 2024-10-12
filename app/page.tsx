@@ -1,10 +1,13 @@
-import { Room } from "./Room";
-import { CollaborativeApp } from "@/app/CollaborativeApp";
+"use client";
+
+import { Live } from "@/Components/Live";
 
 export default function Home() {
     return (
-        <Room>
-            <CollaborativeApp />
-        </Room>
+        <div className="h-screen w-full flex justify-center items-center text-center">
+
+
+            <Live />
+        </div>
     );
 }
